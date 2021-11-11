@@ -17,13 +17,20 @@ e)Luego de ejecutar el contenedor, en el localhost deberá estar levantando el J
 f)Dentro de Jenkins debe configurar el agente principal con 12 Nodos/Ejecutores para que pueda ejecutar en Jobs en paralelo
 
 g)Debe generar un Jenkinsfile con los siguientes parámetros:
-1)	El agente será el principal de Jenkins y el Nodo debe ser cualquiera que esté disponible
-2)	El primer stage será el de descarga de Git donde guardará los datos de las credenciales en el panel de configuración reservada de Jenkins y este será invocado en el Jenkinsfile con la variable del usuario y contraseña, el Brach también deberá ser una variable a selección en la construcción del Job (el repo que se va a descargar es el siguiente https://github.com/luishernandez25/easyTest)
-3)	Luego en el siguiente stage ejecutara el comando “mvn test” desde la ruta donde se descargó el código
+1)	Debera ejecutarse con plugin de kubernetes
+2)	Los parametros del job se codificaran dentro del propio jenkinsfile con groovy. Dos parametros de tipo cadena y combo son suficientes. Con un valor por defecto.
+3)	El  pipeline podra ser tanto pipeline (preferible) como scripted.
+  2.1) El template debera incluir tanto el agente jenkins como una imagen donde se ejecutara el pipeline
+  2.3) Incluso en la version scripted se valorara la inclusión de yaml
+4) El primer stage será el de descarga de Git donde guardará los datos de las credenciales en el panel de configuración reservada de Jenkins y este será invocado en el Jenkinsfile con la variable del usuario y contraseña, el Brach también deberá ser una variable a selección en la construcción del Job (el repo que se va a descargar es el siguiente https://github.com/luishernandez25/easyTest)
+6)	Luego en el siguiente stage ejecutara un comando “sh ” que prouzca una salida en la consola del job	consistente en el valor de los parametros del job. Para la salida se valorara que se haga mediante un fichero js a ejecutar por node que mueste por consola los valores del objecto process.env
+8)	Debera incluirse un stage post con un envio de correo con dichos valores
+
+Para este challenge, empleando imagenes standard debe ser posible inluirlo en un jenkins operativo con un plugin de kubernetes para su prueba.
 
 <h2>Criterios de aceptacion</h2>
 
-Debería subir a un repositorio los dockerfiles , jenkinsfile y/o dockercompose solicitados, además de un readme documentando todos los comandos ejecutados en su orden y descripcion. de su imagen se levantara un contenedor el cual tendra el jenkins para ejecutar el job
+Debería subir a un repositorio los dockerfiles , jenkinsfile y/o dockercompose solicitados, además de un readme documentando todos los comandos ejecutados en su orden y descripcion. de su imagen se levantara un contenedor el cual tendra el jenkins para ejecutar el job.
 
 
 <h2>Nivel Kubernetes </h2>
